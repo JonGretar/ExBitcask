@@ -1,0 +1,15 @@
+_build
+.eunit/*
+deps/*
+cover
+results
+ebin
+doc
+priv/*.so
+mix.lock
+*.o
+*.beam
+*~
+.local_dialyzer_plt
+log/
+*.db
