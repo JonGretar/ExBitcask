@@ -44,7 +44,7 @@ test:
 build-objects: $(C_SRC_O_FILES)
 
 $(C_SRC_DIR)/%.o : $(C_SRC_DIR)/%.c
-	$(CC) $(CMARK_OPTFLAGS) $(CFLAGS) -o $@ -c $<
+	$(CC) $(CMARK_OPTFLAGS) $(ERLANG_FLAGS) $(CFLAGS) -o $@ -c $<
 
 $(C_SRC_DIR):
 	mkdir -p $@
