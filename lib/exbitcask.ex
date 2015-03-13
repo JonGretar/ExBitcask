@@ -49,6 +49,20 @@ defmodule ExBitcask do
   owes a lot to the principles found in log-structured file systems and draws inspiration from a number of designs that
   involve log file merging.
 
+  ## Setup
+
+  First, add ExBitcask to your mix.exs dependencies:
+
+      def deps do
+        [{:ex_bitcask, "~> VERSION"}]
+      end
+
+  and run $ `mix deps.get`. Now, list the :ex_bitcask application as your application dependency:
+
+      def application do
+        [applications: [:ex_bitcask]]
+      end
+
   ## Usage
 
       db = ExBitcask.open("my.db", [:read_write])

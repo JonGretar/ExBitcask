@@ -11,6 +11,24 @@ updating to a new release of Bitcask will take a few days. But I'll try to be qu
 
 ExBitcask currently users version **2.0.0** of bitcask.
 
+## Setup
+
+First, add ExBitcask to your mix.exs dependencies:
+
+```elixir
+def deps do
+  [{:ex_bitcask, "~> VERSION"}]
+end
+```
+
+and run $ `mix deps.get`. Now, list the :ex_bitcask application as your application dependency:
+
+```elixir
+def application do
+  [applications: [:ex_bitcask]]
+end
+```
+
 ## Usage
 
 For full API docs please view the projects [Hexdocs](http://hexdocs.pm/ex_bitcask).
