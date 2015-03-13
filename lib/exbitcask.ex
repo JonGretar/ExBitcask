@@ -2,7 +2,35 @@ defmodule ExBitcask do
   use Application
   alias ExBitcask.Database, as: DB
 
+  defmodule Config do
+    @moduledoc false
+    def set_defaults() do
+      defaults = [
+        {:max_file_size, 2147483648},
+        {:tombstone_version, 2},
+        {:open_timeout, 4},
+        {:sync_strategy, :none},
+        {:require_hint_crc, false},
+        {:merge_window, :always},
+        {:frag_merge_trigger, 60},
+        {:dead_bytes_merge_trigger, 536870912},
+        {:frag_threshold, 40},
+        {:dead_bytes_threshold, 134217728},
+        {:small_file_threshold, 10485760},
+        {:max_fold_age, -1},
+        {:max_fold_puts, 0},
+        {:expiry_secs, -1}
+      ]
+      for {key, val} <- defaults do
+        if Application.get_env(:bitcask, key) == nil do
+          Application.put_env(:bitcask, key, val)
+        end
+      end
+    end
+  end
+
   def start(_type, _args) do
+    Config.set_defaults
     import Supervisor.Spec, warn: false
     children = [
       worker(:bitcask_merge_worker, []),
