@@ -59,7 +59,6 @@ defmodule ExBitcask.Mixfile do
       licenses: ["Apache 2.0"],
       files: ["lib", "src", "c_src/*.h", "c_src/*.c", "include", "config", "Makefile", "mix.exs", "README.md"],
       links: %{
-        "Documentation": "http://hexdocs.pm/ex_bitcask",
         "GitHub": "https://github.com/JonGretar/ExBitcask",
         "Bitcask Info": "https://en.wikipedia.org/wiki/Bitcask",
         "Issues": "https://github.com/JonGretar/ExBitcask/issues"
