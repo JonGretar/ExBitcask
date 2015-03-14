@@ -18,7 +18,7 @@ defmodule ExBitcask.Mixfile do
     [
       app: :ex_bitcask,
       name: "ExBitcask",
-      version: "0.0.2",
+      version: "0.1.0",
       source_url: "https://github.com/JonGretar/ExBitcask",
       homepage_url: "http://hexdocs.pm/ex_bitcask",
       compilers: [:bitcask, :erlang, :elixir, :app],
