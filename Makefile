@@ -1,7 +1,13 @@
 .PHONY: test clean
 CC?=clang
-ERLANG_PATH:=$(shell erl -eval 'io:format("~s~n", [lists:concat([code:root_dir(), "/erts-", erlang:system_info(version), "/include"])])' -s init stop -noshell)
+ERLANG_ROOT:=$(shell erl -eval 'io:format("~s~n", [code:root_dir()])' -s init stop -noshell)
+ERLANG_PATH:=$(shell echo $(ERLANG_ROOT)/erts*/include )
+EI_PATH:=$(shell echo $(ERLANG_ROOT)/lib/erl_interface*/include )
+EI_LIB:=$(shell echo $(ERLANG_ROOT)/lib/erl_interface*/lib )
+# ERLANG_PATH:=$(shell erl -eval 'io:format("~s~n", [lists:concat([code:root_dir(), "/erts-", erlang:system_info(version), "/include"])])' -s init stop -noshell)
+# EI_PATH:="/usr/lib/erlang/lib/erl_interface-3.7.18/include/"
 ERLANG_FLAGS?=-I$(ERLANG_PATH)
+ERLANG_LD_FLAGS?=-L$(EI_LIB) -lerl_interface -lei
 EBIN_DIR?=ebin
 
 NOOUT=2>&1 >/dev/null
@@ -25,7 +31,10 @@ OPTIONS+= -dynamiclib -undefined dynamic_lookup
 endif
 INCLUDES=-I$(C_SRC_DIR)
 
-OPTFLAGS?=-fPIC -std=c99 -Wall
+OPTFLAGS?=-g -Wall -fPIC
+ifeq ($(shell uname),Darwin)
+OPTFLAGS+= -std=c99
+endif
 CFLAGS=-O2 $(OPTFLAGS) $(INCLUDES)
 CMARK_OPTFLAGS=-DNDEBUG
 
